@@ -45,7 +45,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Sidebar" pref="1018" max="32767" attributes="0"/>
+          <Component id="Sidebar" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Component id="PortfolioPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -81,7 +81,7 @@
                   <Component id="SidebarStockMarketBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                   <Component id="SidebarWatchlistBox" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="464" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -243,10 +243,14 @@
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <Component id="StocksLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Component id="PortfolioTitleLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="StockValueBox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="80" max="32767" attributes="0"/>
                           <Component id="AccountValueBox" min="-2" max="-2" attributes="0"/>
@@ -268,7 +272,9 @@
                           <Component id="StockValueBox" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="369" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="StocksLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="282" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -399,6 +405,14 @@
               <Font name=".AppleSystemUIFont" size="50" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Portfolio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="StocksLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name=".AppleSystemUIFont" size="50" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Stocks"/>
           </Properties>
         </Component>
       </SubComponents>
