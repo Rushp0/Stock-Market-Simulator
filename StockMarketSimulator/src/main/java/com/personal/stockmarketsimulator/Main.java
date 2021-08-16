@@ -34,10 +34,23 @@ public class Main extends javax.swing.JFrame {
         StockMarketTitleLabel = new javax.swing.JLabel();
         StocksPane = new javax.swing.JPanel();
         popularStock1 = new javax.swing.JPanel();
-        popularStock5 = new javax.swing.JPanel();
+        popularStock1Symbol = new javax.swing.JLabel();
+        popularStockCurrentPrice = new javax.swing.JLabel();
+        popularStock1PercentChange = new javax.swing.JLabel();
+        popularStock1Open = new javax.swing.JLabel();
+        popularStock1PreviousClose = new javax.swing.JLabel();
         popularStock2 = new javax.swing.JPanel();
+        popularStock2Symbol = new javax.swing.JLabel();
+        popularStock2CurrentPrice = new javax.swing.JLabel();
+        popularStock2PercentChange = new javax.swing.JLabel();
+        popularStock2Open = new javax.swing.JLabel();
+        popularStock2PreviousClose = new javax.swing.JLabel();
         popularStock3 = new javax.swing.JPanel();
-        popularStock4 = new javax.swing.JPanel();
+        popularStock3Symbol = new javax.swing.JLabel();
+        popularStock3CurrentPrice = new javax.swing.JLabel();
+        popularStock3PercentChange = new javax.swing.JLabel();
+        popularStock3Open = new javax.swing.JLabel();
+        popularStock3PreviousClose = new javax.swing.JLabel();
         stockSearchField = new javax.swing.JTextField();
         PortfolioPanel = new javax.swing.JPanel();
         AccountValueBox = new javax.swing.JPanel();
@@ -48,6 +61,8 @@ public class Main extends javax.swing.JFrame {
         PortfolioBalanceLabel = new javax.swing.JLabel();
         PortfolioTitleLabel = new javax.swing.JLabel();
         StocksLabel = new javax.swing.JLabel();
+        stockPortfolioPane = new javax.swing.JScrollPane();
+        stockPortfolioTable = new javax.swing.JTable();
         Sidebar = new javax.swing.JPanel();
         SidebarPortfolioBox = new javax.swing.JPanel();
         SidebarPortfolioLabel = new javax.swing.JLabel();
@@ -55,6 +70,7 @@ public class Main extends javax.swing.JFrame {
         SidbarStockMarketLabel = new javax.swing.JLabel();
         SidebarWatchlistBox = new javax.swing.JPanel();
         SidebarWatchlistLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(245, 247, 249));
@@ -62,7 +78,6 @@ public class Main extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1152, 700));
         setPreferredSize(new java.awt.Dimension(1152, 700));
 
-        MainPane.setLocation(new java.awt.Point(0, 0));
         MainPane.setMaximumSize(new java.awt.Dimension(998, 712));
         MainPane.setMinimumSize(new java.awt.Dimension(998, 712));
         MainPane.setPreferredSize(new java.awt.Dimension(998, 700));
@@ -77,79 +92,184 @@ public class Main extends javax.swing.JFrame {
         StockMarketTitleLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 50)); // NOI18N
         StockMarketTitleLabel.setText("Stock Market");
 
-        StocksPane.setBackground(new java.awt.Color(255, 0, 0));
-        StocksPane.setMinimumSize(new java.awt.Dimension(100, 100));
-        StocksPane.setSize(new java.awt.Dimension(719, 290));
-        StocksPane.setLayout(new java.awt.GridLayout(5, 1, 50, 50));
+        StocksPane.setBackground(new java.awt.Color(245, 247, 249));
+        StocksPane.setMaximumSize(new java.awt.Dimension(916, 700));
+        StocksPane.setMinimumSize(new java.awt.Dimension(916, 700));
+        StocksPane.setPreferredSize(new java.awt.Dimension(916, 700));
+        StocksPane.setSize(new java.awt.Dimension(916, 700));
+        StocksPane.setLayout(new java.awt.GridLayout(3, 1, 50, 50));
+
+        popularStock1.setBackground(new java.awt.Color(255, 255, 255));
+
+        popularStock1Symbol.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
+        popularStock1Symbol.setText("Symbol 1");
+
+        popularStockCurrentPrice.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStockCurrentPrice.setText("Current Price:");
+
+        popularStock1PercentChange.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock1PercentChange.setText("Percent Change:");
+
+        popularStock1Open.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock1Open.setText("Open:");
+
+        popularStock1PreviousClose.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock1PreviousClose.setText("Previous Close:");
 
         javax.swing.GroupLayout popularStock1Layout = new javax.swing.GroupLayout(popularStock1);
         popularStock1.setLayout(popularStock1Layout);
         popularStock1Layout.setHorizontalGroup(
             popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGroup(popularStock1Layout.createSequentialGroup()
+                .addGroup(popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(popularStock1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(popularStock1Symbol))
+                    .addGroup(popularStock1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popularStockCurrentPrice)
+                            .addComponent(popularStock1PercentChange))
+                        .addGap(282, 282, 282)
+                        .addGroup(popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popularStock1PreviousClose)
+                            .addComponent(popularStock1Open))))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         popularStock1Layout.setVerticalGroup(
             popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGroup(popularStock1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(popularStock1Symbol)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popularStockCurrentPrice)
+                    .addComponent(popularStock1Open))
+                .addGap(12, 12, 12)
+                .addGroup(popularStock1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popularStock1PercentChange)
+                    .addComponent(popularStock1PreviousClose))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         StocksPane.add(popularStock1);
 
-        javax.swing.GroupLayout popularStock5Layout = new javax.swing.GroupLayout(popularStock5);
-        popularStock5.setLayout(popularStock5Layout);
-        popularStock5Layout.setHorizontalGroup(
-            popularStock5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
-        );
-        popularStock5Layout.setVerticalGroup(
-            popularStock5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
+        popularStock2.setBackground(new java.awt.Color(255, 255, 255));
 
-        StocksPane.add(popularStock5);
+        popularStock2Symbol.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
+        popularStock2Symbol.setText("Symbol 2");
+
+        popularStock2CurrentPrice.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock2CurrentPrice.setText("Current Price:");
+
+        popularStock2PercentChange.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock2PercentChange.setText("Percent Change:");
+
+        popularStock2Open.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock2Open.setText("Open:");
+
+        popularStock2PreviousClose.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock2PreviousClose.setText("Previous Close:");
 
         javax.swing.GroupLayout popularStock2Layout = new javax.swing.GroupLayout(popularStock2);
         popularStock2.setLayout(popularStock2Layout);
         popularStock2Layout.setHorizontalGroup(
             popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGroup(popularStock2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(popularStock2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popularStock2PercentChange)
+                            .addComponent(popularStock2CurrentPrice))
+                        .addGap(280, 280, 280)
+                        .addGroup(popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popularStock2Open)
+                            .addComponent(popularStock2PreviousClose)))
+                    .addComponent(popularStock2Symbol))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         popularStock2Layout.setVerticalGroup(
             popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGroup(popularStock2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(popularStock2Symbol)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popularStock2CurrentPrice)
+                    .addComponent(popularStock2Open))
+                .addGap(12, 12, 12)
+                .addGroup(popularStock2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popularStock2PercentChange)
+                    .addComponent(popularStock2PreviousClose))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         StocksPane.add(popularStock2);
+
+        popularStock3.setBackground(new java.awt.Color(255, 255, 255));
+
+        popularStock3Symbol.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
+        popularStock3Symbol.setText("Symbol 3");
+
+        popularStock3CurrentPrice.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock3CurrentPrice.setText("Current Price:");
+
+        popularStock3PercentChange.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock3PercentChange.setText("Percent Change:");
+
+        popularStock3Open.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock3Open.setText("Open:");
+
+        popularStock3PreviousClose.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
+        popularStock3PreviousClose.setText("Previous Close:");
 
         javax.swing.GroupLayout popularStock3Layout = new javax.swing.GroupLayout(popularStock3);
         popularStock3.setLayout(popularStock3Layout);
         popularStock3Layout.setHorizontalGroup(
             popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGroup(popularStock3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(popularStock3Symbol)
+                    .addGroup(popularStock3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popularStock3CurrentPrice)
+                            .addComponent(popularStock3PercentChange))))
+                .addGap(282, 282, 282)
+                .addGroup(popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(popularStock3Layout.createSequentialGroup()
+                        .addComponent(popularStock3Open)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(popularStock3Layout.createSequentialGroup()
+                        .addComponent(popularStock3PreviousClose)
+                        .addGap(0, 273, Short.MAX_VALUE))))
         );
         popularStock3Layout.setVerticalGroup(
             popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGroup(popularStock3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(popularStock3Symbol)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popularStock3CurrentPrice)
+                    .addComponent(popularStock3Open))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(popularStock3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(popularStock3PreviousClose)
+                    .addComponent(popularStock3PercentChange))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         StocksPane.add(popularStock3);
 
-        javax.swing.GroupLayout popularStock4Layout = new javax.swing.GroupLayout(popularStock4);
-        popularStock4.setLayout(popularStock4Layout);
-        popularStock4Layout.setHorizontalGroup(
-            popularStock4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
-        );
-        popularStock4Layout.setVerticalGroup(
-            popularStock4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
-
-        StocksPane.add(popularStock4);
-
         stockSearchField.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 20)); // NOI18N
         stockSearchField.setForeground(new java.awt.Color(196, 196, 196));
         stockSearchField.setText("Search Stock Symbol");
+        stockSearchField.setMaximumSize(new java.awt.Dimension(229, 35));
+        stockSearchField.setMinimumSize(new java.awt.Dimension(229, 35));
         stockSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 SearchFocusLost(evt);
@@ -178,10 +298,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(StockMarketPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(StockMarketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(StocksPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(StockMarketTitleLabel)
-                    .addComponent(stockSearchField))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(StocksPane, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         StockMarketPanelLayout.setVerticalGroup(
             StockMarketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,6 +392,20 @@ public class Main extends javax.swing.JFrame {
         StocksLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 50)); // NOI18N
         StocksLabel.setText("Stocks");
 
+        stockPortfolioTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        stockPortfolioTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        stockPortfolioPane.setViewportView(stockPortfolioTable);
+
         javax.swing.GroupLayout PortfolioPanelLayout = new javax.swing.GroupLayout(PortfolioPanel);
         PortfolioPanel.setLayout(PortfolioPanelLayout);
         PortfolioPanelLayout.setHorizontalGroup(
@@ -283,11 +417,14 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(PortfolioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(StocksLabel)
                             .addComponent(PortfolioTitleLabel))
-                        .addContainerGap(730, Short.MAX_VALUE))
-                    .addGroup(PortfolioPanelLayout.createSequentialGroup()
-                        .addComponent(StockValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AccountValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PortfolioPanelLayout.createSequentialGroup()
+                        .addGroup(PortfolioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(stockPortfolioPane)
+                            .addGroup(PortfolioPanelLayout.createSequentialGroup()
+                                .addComponent(StockValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addComponent(AccountValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(51, 51, 51))))
         );
         PortfolioPanelLayout.setVerticalGroup(
@@ -301,7 +438,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(AccountValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(StocksLabel)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(stockPortfolioPane, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         MainPane.setLayer(StockMarketPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -352,7 +491,7 @@ public class Main extends javax.swing.JFrame {
         SidebarPortfolioBoxLayout.setHorizontalGroup(
             SidebarPortfolioBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SidebarPortfolioBoxLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(38, 38, 38)
                 .addComponent(SidebarPortfolioLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -385,10 +524,10 @@ public class Main extends javax.swing.JFrame {
         SidebarStockMarketBox.setLayout(SidebarStockMarketBoxLayout);
         SidebarStockMarketBoxLayout.setHorizontalGroup(
             SidebarStockMarketBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SidebarStockMarketBoxLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarStockMarketBoxLayout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(SidbarStockMarketLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         SidebarStockMarketBoxLayout.setVerticalGroup(
             SidebarStockMarketBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,7 +557,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarWatchlistBoxLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SidebarWatchlistLabel)
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
         SidebarWatchlistBoxLayout.setVerticalGroup(
             SidebarWatchlistBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,6 +567,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
+        jLabel1.setFont(new java.awt.Font("Papyrus", 3, 50)); // NOI18N
+        jLabel1.setText("SMS");
+
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
         SidebarLayout.setHorizontalGroup(
@@ -435,15 +577,21 @@ public class Main extends javax.swing.JFrame {
             .addComponent(SidebarPortfolioBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(SidebarStockMarketBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
             .addComponent(SidebarWatchlistBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37))
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SidebarLayout.createSequentialGroup()
-                .addGap(207, 207, 207)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel1)
+                .addGap(84, 84, 84)
                 .addComponent(SidebarPortfolioBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
+                .addGap(93, 93, 93)
                 .addComponent(SidebarStockMarketBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
+                .addGap(93, 93, 93)
                 .addComponent(SidebarWatchlistBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -555,6 +703,7 @@ public class Main extends javax.swing.JFrame {
 //        System.out.println(evt.getKeyChar());
         if(evt.getKeyChar()=='\n'){
             JOptionPane.showMessageDialog(this, stockSearchField.getText());
+            this.requestFocus();
         }
     }//GEN-LAST:event_SearchEnterPressed
     private void none(java.awt.event.MouseEvent evt){}
@@ -617,11 +766,27 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel StockValueBox;
     private javax.swing.JLabel StocksLabel;
     private javax.swing.JPanel StocksPane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel popularStock1;
+    private javax.swing.JLabel popularStock1Open;
+    private javax.swing.JLabel popularStock1PercentChange;
+    private javax.swing.JLabel popularStock1PreviousClose;
+    private javax.swing.JLabel popularStock1Symbol;
     private javax.swing.JPanel popularStock2;
+    private javax.swing.JLabel popularStock2CurrentPrice;
+    private javax.swing.JLabel popularStock2Open;
+    private javax.swing.JLabel popularStock2PercentChange;
+    private javax.swing.JLabel popularStock2PreviousClose;
+    private javax.swing.JLabel popularStock2Symbol;
     private javax.swing.JPanel popularStock3;
-    private javax.swing.JPanel popularStock4;
-    private javax.swing.JPanel popularStock5;
+    private javax.swing.JLabel popularStock3CurrentPrice;
+    private javax.swing.JLabel popularStock3Open;
+    private javax.swing.JLabel popularStock3PercentChange;
+    private javax.swing.JLabel popularStock3PreviousClose;
+    private javax.swing.JLabel popularStock3Symbol;
+    private javax.swing.JLabel popularStockCurrentPrice;
+    private javax.swing.JScrollPane stockPortfolioPane;
+    private javax.swing.JTable stockPortfolioTable;
     private javax.swing.JTextField stockSearchField;
     // End of variables declaration//GEN-END:variables
 }
