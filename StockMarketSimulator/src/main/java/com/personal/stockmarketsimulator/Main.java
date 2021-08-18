@@ -3,7 +3,7 @@ package com.personal.stockmarketsimulator;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
-import com.personal.stockmarketsimulator.stock.Stock;
+import com.personal.stockmarketsimulator.stocks.Stock;
 
 /**
  * @author Rushi
@@ -698,10 +698,30 @@ public class Main extends javax.swing.JFrame {
     private void SearchEnterPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchEnterPressed
 
         if(evt.getKeyChar()=='\n'){
+        	String[] OPTIONS = new String[]{"Close", "Purchase Stocks"};
         	
         	Stock s = new Stock(stockSearchField.getText());
         	
-            JOptionPane.showMessageDialog(this, s.getPriceFormatted());
+        	String stockSummary = s.getCompany()+"\t["+s.getSymbol().toUpperCase()+"]\n"
+        			+ "Current Price: "+s.getPriceFormatted()+"\n"
+        			+ "Previous Close: "+ s.getPreviousCloseFormatted();
+        	
+            int choice = JOptionPane.showOptionDialog(this, stockSummary, s.getCompany() +" Stock Summary", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, OPTIONS, OPTIONS[0]); 
+            
+            // if the user chooses to purchase stocks
+            if(OPTIONS[choice].equals("Purchase Stocks")) {
+            	
+            	String purchaseAmount = JOptionPane.showInputDialog("Enter number of stocks to purchase: ");
+            	if(purchaseAmount==null)
+            		purchaseAmount = null;
+            	
+            	while(purchaseAmount.isBlank() || purchaseAmount.isEmpty()) {
+            		purchaseAmount = JOptionPane.showInputDialog("Enter number of stocks to purchase: ");
+            		if(purchaseAmount==null) break;
+            	}	
+            }
+            
+            
             this.requestFocus();
         }
         

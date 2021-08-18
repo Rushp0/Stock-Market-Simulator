@@ -1,4 +1,4 @@
-package com.personal.stockmarketsimulator.stock;
+package com.personal.stockmarketsimulator.stocks;
 
 /**
  * @author Rushi
