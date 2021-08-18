@@ -1,21 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.personal.stockmarketsimulator;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import javax.swing.JOptionPane;
+
+import com.personal.stockmarketsimulator.stock.Stock;
+
 /**
  * @author Rushi
  */
+
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
     public Main() {
         initComponents();
     }
@@ -70,13 +65,11 @@ public class Main extends javax.swing.JFrame {
         SidbarStockMarketLabel = new javax.swing.JLabel();
         SidebarWatchlistBox = new javax.swing.JPanel();
         SidebarWatchlistLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(245, 247, 249));
-        setMaximumSize(new java.awt.Dimension(1152, 700));
         setMinimumSize(new java.awt.Dimension(1152, 700));
-        setPreferredSize(new java.awt.Dimension(1152, 700));
 
         MainPane.setMaximumSize(new java.awt.Dimension(998, 712));
         MainPane.setMinimumSize(new java.awt.Dimension(998, 712));
@@ -404,6 +397,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        stockPortfolioTable.setEnabled(false);
         stockPortfolioPane.setViewportView(stockPortfolioTable);
 
         javax.swing.GroupLayout PortfolioPanelLayout = new javax.swing.GroupLayout(PortfolioPanel);
@@ -478,7 +472,6 @@ public class Main extends javax.swing.JFrame {
                 SidebarPortfolioBoxExit(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                none(evt);
                 PortfolioPressed(evt);
             }
         });
@@ -545,6 +538,9 @@ public class Main extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 SidebarWatchlistBoxExit(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SidebarWatchlistBoxClicked(evt);
+            }
         });
 
         SidebarWatchlistLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
@@ -554,10 +550,10 @@ public class Main extends javax.swing.JFrame {
         SidebarWatchlistBox.setLayout(SidebarWatchlistBoxLayout);
         SidebarWatchlistBoxLayout.setHorizontalGroup(
             SidebarWatchlistBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarWatchlistBoxLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(SidebarWatchlistBoxLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(SidebarWatchlistLabel)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SidebarWatchlistBoxLayout.setVerticalGroup(
             SidebarWatchlistBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,8 +563,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Papyrus", 3, 50)); // NOI18N
-        jLabel1.setText("SMS");
+        logo.setFont(new java.awt.Font("Papyrus", 3, 50)); // NOI18N
+        logo.setText("SMS");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -579,14 +575,14 @@ public class Main extends javax.swing.JFrame {
             .addComponent(SidebarWatchlistBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(logo)
                 .addGap(37, 37, 37))
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SidebarLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jLabel1)
+                .addComponent(logo)
                 .addGap(84, 84, 84)
                 .addComponent(SidebarPortfolioBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
@@ -700,13 +696,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchFocusLost
 
     private void SearchEnterPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchEnterPressed
-//        System.out.println(evt.getKeyChar());
+
         if(evt.getKeyChar()=='\n'){
-            JOptionPane.showMessageDialog(this, stockSearchField.getText());
+        	
+        	Stock s = new Stock(stockSearchField.getText());
+        	
+            JOptionPane.showMessageDialog(this, s.getPriceFormatted());
             this.requestFocus();
         }
+        
+        
     }//GEN-LAST:event_SearchEnterPressed
-    private void none(java.awt.event.MouseEvent evt){}
+
+    private void SidebarWatchlistBoxClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarWatchlistBoxClicked
+        JOptionPane.showMessageDialog(this, "Watchlist in W.I.P.");
+    }//GEN-LAST:event_SidebarWatchlistBoxClicked
     
     /**
      * @param args the command line arguments
@@ -743,8 +747,6 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AccountValueBox;
     private javax.swing.JLabel AccountValueLabel;
@@ -766,7 +768,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel StockValueBox;
     private javax.swing.JLabel StocksLabel;
     private javax.swing.JPanel StocksPane;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel logo;
     private javax.swing.JPanel popularStock1;
     private javax.swing.JLabel popularStock1Open;
     private javax.swing.JLabel popularStock1PercentChange;
