@@ -1,4 +1,4 @@
-package com.personal.stockmarketsimulator.stock;
+package com.personal.stockmarketsimulator.stocks;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -38,7 +38,7 @@ public class Stock {
 			this.currentPrice = Double.parseDouble(data.get("price"));
 			this.previousClose = Double.parseDouble(data.get("previousClose"));
 			
-		} catch(InvalidStockSymbolException e) {
+		} catch(InvalidStockSymbolException e) { // add exception catch for if stock symbol slips by. ex: APPL vs. AAPl
 			System.err.println("The stock symbol entered is invalid");
 			
 		}
@@ -54,7 +54,6 @@ public class Stock {
 				.method("GET", HttpRequest.BodyPublishers.noBody())
 				.build();
 		
-		@SuppressWarnings("unchecked")
 		HttpResponse<String> response = null;
 		
 		try {
@@ -71,10 +70,10 @@ public class Stock {
 	
 	private void convertToDictionary() throws InvalidStockSymbolException {
 		
-		String[] splitResponse = summary.split("\",");
+		String[] splitResponse = summary.split("\","); // seperates data from API
 		
 		if(splitResponse[0].isBlank()) {
-			throw new InvalidStockSymbolException();
+			throw new InvalidStockSymbolException(); // throws exception if search box is empty
 		}
 		
 		for(String i: splitResponse) 
@@ -92,6 +91,9 @@ public class Stock {
 	public double getPreviousClose() {
 		return previousClose;
 	}
+	public String getPreviousCloseFormatted() {
+		return currencyFormat(previousClose);
+	}
 	public String getSymbol() {
 		return symbol;
 	}
@@ -99,8 +101,14 @@ public class Stock {
 		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
 		return currencyFormatter.format(currentPrice);
 	}
+	public String getCompany() {
+		return data.get("symbolName");
+	}
 	
-	
+	private String currencyFormat(double amount) {
+		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
+		return currencyFormatter.format(amount); 
+	}
 	
 	public static void main(String[] args) {
 		
