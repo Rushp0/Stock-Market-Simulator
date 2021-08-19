@@ -1,14 +1,16 @@
 package com.personal.stockmarketsimulator.stocks;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.net.URI;
 import java.net.http.*;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.regex.*;
+import java.util.Map;
 
-public class Stock {
+
+import com.personal.stockmarketsimulator.gui.LimitExceededException;
+
+public class Stock implements Serializable{
 	/**
 	 * Stock:
 	 * 
@@ -23,7 +25,7 @@ public class Stock {
 	private double open;
 	private double previousClose;
 	private String summary;
-	private Dictionary<String,String> data = new Hashtable<String, String>();
+	private Map<String,String> data;
 	
 	/**
 	 * @param symbol: symbol for stock
@@ -33,16 +35,33 @@ public class Stock {
 		this.symbol = symbol;
 		
 		summary = retrieveStockData().body();
+		
 		try {
-			convertToDictionary();
+			if(summary.equals("{\"message\":\"Limit Exceeded\"}")) 
+				throw new LimitExceededException("API limit has been reached.");
+			
+		}catch(LimitExceededException e) {
+			System.err.println("LimitExceededException: " +e.getMessage());
+		}
+		
+		try {
+			convertToHashMap();
 			this.currentPrice = Double.parseDouble(data.get("price"));
 			this.previousClose = Double.parseDouble(data.get("previousClose"));
 			
 		} catch(InvalidStockSymbolException e) { // add exception catch for if stock symbol slips by. ex: APPL vs. AAPl
 			System.err.println("The stock symbol entered is invalid");
 			
+		} catch(NullPointerException e) {
+			System.err.println("NullPointerException: The failed to parse price from API response. Line 58 Stock.java");
 		}
 
+	}
+	
+	public Stock(String symbol, double price, double previousClose) {
+		this.symbol = symbol;
+		this.currentPrice = price;
+		this.previousClose = previousClose;
 	}
 	
 	private HttpResponse<String> retrieveStockData(){
@@ -68,7 +87,7 @@ public class Stock {
 		return response;
 	}
 	
-	private void convertToDictionary() throws InvalidStockSymbolException {
+	private void convertToHashMap() throws InvalidStockSymbolException {
 		
 		String[] splitResponse = summary.split("\","); // seperates data from API
 		
@@ -78,9 +97,10 @@ public class Stock {
 		
 		for(String i: splitResponse) 
 			data.put((i.substring(2, i.indexOf(":")-1)).replace("\"","").strip(),  i.substring(i.indexOf(":")+2));
+
 	}
 	
-	public Dictionary<String, String> getStockSummary(){
+	public Map<String, String> getStockSummary(){
 		return data;
 	}
 	
@@ -91,18 +111,22 @@ public class Stock {
 	public double getPreviousClose() {
 		return previousClose;
 	}
+	
 	public String getPreviousCloseFormatted() {
 		return currencyFormat(previousClose);
 	}
+	
 	public String getSymbol() {
 		return symbol;
 	}
+	
 	public String getPriceFormatted() {
 		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
 		return currencyFormatter.format(currentPrice);
 	}
+	
 	public String getCompany() {
-		return data.get("symbolName");
+		return symbol+"R"; // return data.get("symbolName");
 	}
 	
 	private String currencyFormat(double amount) {
@@ -110,11 +134,7 @@ public class Stock {
 		return currencyFormatter.format(amount); 
 	}
 	
-	public static void main(String[] args) {
-		
-		Stock s = new Stock("TSLA");
-		System.out.println(s.getSymbol()+": "+s.getPrice());
-		
+	public boolean equals(Stock s) {
+		return this.symbol.equals(s.getSymbol());
 	}
-	
 }
