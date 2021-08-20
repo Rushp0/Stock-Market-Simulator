@@ -5,10 +5,10 @@ import java.text.NumberFormat;
 
 public class BankAccount implements Serializable{
 
-	private double accountBalance = 10000;
+	private double accountBalance;
 	
 	public BankAccount() {
-		
+		accountBalance = 10000;
 	}
 	
 	public double getAccountBalance() {

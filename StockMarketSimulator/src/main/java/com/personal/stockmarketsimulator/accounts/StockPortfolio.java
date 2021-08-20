@@ -13,14 +13,15 @@ public class StockPortfolio implements Serializable{
 	private static int FLUSH_SERIALIZLING = 0;
 	
 	
-	private double stockValue = 0;
-	private int stockAmount = 0;
+	private double stockValue;
+	private int stockAmount;
 	private Map<Stock, Integer> stockList = new HashMap<Stock, Integer>();
 //	private static Map<Stock, Integer> emptyHashMap = new HashMap<Stock, Integer>();
 	private BankAccount bankAccount;
 	
 	public StockPortfolio(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
+		calculateStockValue();
 	}
 	
 	public void purchaseStock(Stock stock, int amount) {
@@ -93,6 +94,7 @@ public class StockPortfolio implements Serializable{
 			objIn.close();
 			
 			stockAmount = stockList.size();
+			calculateStockValue();
 			
 			
 		}catch(IOException | ClassNotFoundException e) {
@@ -124,18 +126,15 @@ public class StockPortfolio implements Serializable{
 	}
 
 	public String[] getDataArray(Stock s) {
-		return new String[] {s.getCompany(), s.getSymbol(), stockList.get(s).toString(), ((Double)(stockList.get(s)*s.getPrice())).toString()};
+		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
+		return new String[] {s.getSymbol(), stockList.get(s).toString(), ((Double)s.getPrice()).toString(), (currencyFormatter.format((Double)(stockList.get(s)*s.getPrice()))).toString()};
+	}	
+
+	public void updateStockPortfolio() {
+		calculateStockValue();
 	}
 	
-//	public static void main(String[] args) {
-//		
-//		BankAccount b = new BankAccount();
-//		StockPortfolio sp = new StockPortfolio(b);
-//		
-//		sp.serializablePortfolio(FLUSH_SERIALIZLING);
-//		
-//	}
-
-	
-	
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
 }
