@@ -1,13 +1,8 @@
 package com.personal.stockmarketsimulator.gui;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import com.personal.stockmarketsimulator.accounts.BankAccount;
 import com.personal.stockmarketsimulator.accounts.StockPortfolio;
 import com.personal.stockmarketsimulator.stocks.Stock;
@@ -411,7 +406,7 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Company", "Symbol", "Stocks Owned", "Stock Value"
+                "Symbol", "Stocks Owned", "Price", "Stock Value"
             }
         ));
         stockPortfolioTable.setEnabled(false);
@@ -636,8 +631,10 @@ public class Main extends javax.swing.JFrame {
     	// deserailize stock portfolio and bank account
     	stockPortfolio.deserializePortfolio();
     	
+    	updatePopularStocks(); 
+    	
     	// init account value box
-    	this.AccountValueLabel.setText(bankAccount.getAccountBalanceFormatted());
+    	this.AccountValueLabel.setText(stockPortfolio.getBankAccount().getAccountBalanceFormatted());
     	this.AccountValueLabel.setMinimumSize(new java.awt.Dimension(this.AccountValueLabel.getText().length()*36,71));
     	
     	// init portfolio value box
@@ -645,7 +642,7 @@ public class Main extends javax.swing.JFrame {
     	this.PortfolioBalanceLabel.setMinimumSize(new java.awt.Dimension(this.PortfolioBalanceLabel.getText().length()*36,71));
     	
     	/**
-    	 * Add stock portfolio to table:
+    	 * Adding stock portfolio to table:
     	 */
     	
     	String[][] portfolioData = new String[stockPortfolio.getPortfolioSize()][4];
@@ -730,6 +727,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     	this.PortfolioPanel.setVisible(true);
         this.StockMarketPanel.setVisible(false);
+        this.updateStockPortfolio();
+        this.updateBankAccount();
     }//GEN-LAST:event_PortfolioPressed
 
     private void stockSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockSearchFieldActionPerformed
@@ -752,11 +751,13 @@ public class Main extends javax.swing.JFrame {
         	
         	Stock s = new Stock(stockSearchField.getText());
         	
-        	String stockSummary = s.getCompany()+"\t["+s.getSymbol().toUpperCase()+"]\n"
+        	String stockSummary = "["+s.getSymbol().toUpperCase()+"]"+"\n"
         			+ "Current Price: "+s.getPriceFormatted()+"\n"
-        			+ "Previous Close: "+ s.getPreviousCloseFormatted();
+        			+ "Previous Close: "+ s.getPreviousCloseFormatted()+"\n"
+        			+ "Volume: "+ s.getVolume()+"\n"
+        			+ "Open: $"+ s.getOpen();
         	
-            int choice = JOptionPane.showOptionDialog(this, stockSummary, s.getCompany() +" Stock Summary", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, OPTIONS, OPTIONS[0]); 
+            int choice = JOptionPane.showOptionDialog(this, stockSummary, s.getSymbol() +" Stock Summary", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, OPTIONS, OPTIONS[0]); 
             
             // if the user chooses to purchase stocks
             if(OPTIONS[choice].equals("Purchase Stocks")) {
@@ -781,6 +782,12 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SearchEnterPressed
 
+    private void updateBankAccount() {
+    	this.AccountValueLabel.setText(stockPortfolio.getBankAccount().getAccountBalanceFormatted());
+    	this.AccountValueLabel.setMinimumSize(new java.awt.Dimension(this.AccountValueLabel.getText().length()*36,71));
+    	
+    }
+    
     private void updateStockPortfolio() {
     	
     	String[][] portfolioData = new String[stockPortfolio.getPortfolioSize()][4];
@@ -795,12 +802,44 @@ public class Main extends javax.swing.JFrame {
     	
     	for(String[] row : portfolioData)
     		table.addRow(row);
+    	
+    	stockPortfolio.updateStockPortfolio();
+    	this.updateBankAccount();
     }
     
     private void SidebarWatchlistBoxClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarWatchlistBoxClicked
         JOptionPane.showMessageDialog(this, "Watchlist in W.I.P.");
     }//GEN-LAST:event_SidebarWatchlistBoxClicked
     
+    private void updatePopularStocks() {
+    	
+    	Stock stock1 = new Stock("AAPL");
+    	Stock stock2 = new Stock("TSLA");
+    	Stock stock3 = new Stock("PFE");
+    	
+    	// Stock 1
+    	popularStockCurrentPrice.setText("Current Price: "+stock1.getPriceFormatted());
+    	popularStock1Open.setText("Open: "+stock1.getOpenFormatted());
+    	popularStock1PercentChange.setText("Percent Change: "+stock1.getPercentChangeFormatted());
+    	popularStock1PreviousClose.setText("Previous Close: "+stock1.getPreviousCloseFormatted());
+    	popularStock1Symbol.setText(stock1.getSymbol());
+    	
+    	// Stock 2
+    	popularStock2CurrentPrice.setText("Current Price: "+stock2.getPriceFormatted());
+    	popularStock2Open.setText("Open: "+stock2.getOpenFormatted());
+    	popularStock2PercentChange.setText("Percent Change: "+stock2.getPercentChangeFormatted());
+    	popularStock2PreviousClose.setText("Previous Close: "+stock2.getPreviousCloseFormatted());
+    	popularStock2Symbol.setText(stock2.getSymbol());
+    	
+    	// Stock 3
+    	popularStock3CurrentPrice.setText("Current Price: "+stock3.getPriceFormatted());
+    	popularStock3Open.setText("Open: "+stock3.getOpenFormatted());
+    	popularStock3PercentChange.setText("Percent Change: "+stock3.getPercentChangeFormatted());
+    	popularStock3PreviousClose.setText("Previous Close: "+stock3.getPreviousCloseFormatted());
+    	popularStock3Symbol.setText(stock3.getSymbol());
+    	
+    	
+    }
     
     private void programEnding(java.awt.event.WindowEvent evt) {                               
         this.stockPortfolio.finishSeralizlingPortfolio();

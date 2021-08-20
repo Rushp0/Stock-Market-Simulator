@@ -3,105 +3,112 @@ package com.personal.stockmarketsimulator.stocks;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.net.URI;
-import java.net.http.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
-
-import com.personal.stockmarketsimulator.gui.LimitExceededException;
+/**
+ * Stock:
+ * 
+ * Contains information from API on the stock
+ * 
+ * @author Rushi
+ */
 
 public class Stock implements Serializable{
-	/**
-	 * Stock:
-	 * 
-	 * Contains information from API on the stock
-	 * 
-	 * @author Rushi
-	 */
+	
+	private static final long serialVersionUID = 2015460279361181404L;
 	
 	private String symbol;
 	private double currentPrice;
 	private double percentChange;
 	private double open;
 	private double previousClose;
-	private String summary;
-	private Map<String,String> data;
+	private Map<String,String> data = new HashMap<String, String>();
+	
 	
 	/**
 	 * @param symbol: symbol for stock
 	 */
+	@SuppressWarnings("deprecation")
 	public Stock(String symbol){
 		
-		this.symbol = symbol;
+		this.symbol = symbol.toUpperCase();
 		
-		summary = retrieveStockData().body();
+		retrieveStockData();
 		
-		try {
-			if(summary.equals("{\"message\":\"Limit Exceeded\"}")) 
-				throw new LimitExceededException("API limit has been reached.");
-			
-		}catch(LimitExceededException e) {
-			System.err.println("LimitExceededException: " +e.getMessage());
-		}
-		
-		try {
-			convertToHashMap();
-			this.currentPrice = Double.parseDouble(data.get("price"));
-			this.previousClose = Double.parseDouble(data.get("previousClose"));
-			
-		} catch(InvalidStockSymbolException e) { // add exception catch for if stock symbol slips by. ex: APPL vs. AAPl
-			System.err.println("The stock symbol entered is invalid");
-			
-		} catch(NullPointerException e) {
-			System.err.println("NullPointerException: The failed to parse price from API response. Line 58 Stock.java");
-		}
+		currentPrice = new Double(data.get("price"));
+		percentChange = new Double(data.get("change percent").replace("%", ""));
+		open = new Double(data.get("open"));
+		previousClose = new Double(data.get("previous close"));
+		this.symbol = data.get("symbol");
 
 	}
 	
-	public Stock(String symbol, double price, double previousClose) {
-		this.symbol = symbol;
-		this.currentPrice = price;
-		this.previousClose = previousClose;
-	}
-	
-	private HttpResponse<String> retrieveStockData(){
-		
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://stockexchangeapi.p.rapidapi.com/price/"+symbol))
-				.header("x-rapidapi-key", "b6b518db45msh86b1facf43da1e2p10a17ejsn51bd4968a13c")
-				.header("x-rapidapi-host", "stockexchangeapi.p.rapidapi.com")
-				.method("GET", HttpRequest.BodyPublishers.noBody())
-				.build();
-		
-		HttpResponse<String> response = null;
-		
+	private void retrieveStockData(){
+
+		URL url;
 		try {
-			response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			url = new URL("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+symbol+"&apikey=4VPGHSZ4AR8J12D4");
+			HttpURLConnection request = (HttpURLConnection) url.openConnection();
+			
+			request.setRequestMethod("GET");
+			request.connect();
+			
+			Scanner scn = new Scanner(request.getInputStream());
+			
+			String output = "";
+			
+			while(scn.hasNext())
+				output+=scn.nextLine();
+			
+//			if(output.contains("\"Global Quote\": {}"))
+				// finish
+			
+
+			
+			String[] splitResponse = output.split(",");
+			splitResponse[0]=splitResponse[0].substring(splitResponse[0].indexOf("01."));
+			splitResponse[splitResponse.length-1] = splitResponse[splitResponse.length-1].replace("}", "").strip();
+			
+			for(String i: splitResponse)
+				data.put(i.substring(i.indexOf(".")+2, i.indexOf(":")-1), i.substring(i.indexOf(":")+3, i.length()-1));
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.err.println("IOException");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			System.err.println("InterruptedException");
-		}
-		return response;
-	}
-	
-	private void convertToHashMap() throws InvalidStockSymbolException {
-		
-		String[] splitResponse = summary.split("\","); // seperates data from API
-		
-		if(splitResponse[0].isBlank()) {
-			throw new InvalidStockSymbolException(); // throws exception if search box is empty
+			e.printStackTrace();
 		}
 		
-		for(String i: splitResponse) 
-			data.put((i.substring(2, i.indexOf(":")-1)).replace("\"","").strip(),  i.substring(i.indexOf(":")+2));
-
 	}
 	
 	public Map<String, String> getStockSummary(){
 		return data;
+	}
+	
+	public double getPercentChange() {
+		return percentChange;
+	}
+	
+	public String getPercentChangeFormatted() {
+		return percentChange+"%";
+	}
+	
+	public double getOpen() {
+		return open;
+	} 
+	
+	public String getOpenFormatted() {
+		return currencyFormat(open);
 	}
 	
 	public double getPrice() {
@@ -125,8 +132,8 @@ public class Stock implements Serializable{
 		return currencyFormatter.format(currentPrice);
 	}
 	
-	public String getCompany() {
-		return symbol+"R"; // return data.get("symbolName");
+	public String getVolume() {
+		return data.get("volume");
 	}
 	
 	private String currencyFormat(double amount) {
