@@ -13,7 +13,7 @@ public class testingNewAPI {
 		
 		Map<String, String> data = new HashMap<String, String>();
 		
-		URL url = new URL("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPl&apikey=4VPGHSZ4AR8J12D4");
+		URL url = new URL("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPl&apikey=");
 		HttpURLConnection request = (HttpURLConnection) url.openConnection();
 		
 		request.setRequestMethod("GET");
