@@ -70,8 +70,8 @@ public class Main extends javax.swing.JFrame {
         SidebarPortfolioLabel = new javax.swing.JLabel();
         SidebarStockMarketBox = new javax.swing.JPanel();
         SidbarStockMarketLabel = new javax.swing.JLabel();
-        SidebarWatchlistBox = new javax.swing.JPanel();
-        SidebarWatchlistLabel = new javax.swing.JLabel();
+        SidebarSellStocksBox = new javax.swing.JPanel();
+        SidebarSellStocksLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -330,7 +330,7 @@ public class Main extends javax.swing.JFrame {
         AccountValueBox.setPreferredSize(new java.awt.Dimension(406, 227));
 
         AccountValueLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 60)); // NOI18N
-        AccountValueLabel.setText("$10,000");
+        AccountValueLabel.setText("$10,000.00");
         AccountValueLabel.setSize(new java.awt.Dimension(200, 200));
 
         AccountValueLabelText.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
@@ -341,23 +341,23 @@ public class Main extends javax.swing.JFrame {
         AccountValueBox.setLayout(AccountValueBoxLayout);
         AccountValueBoxLayout.setHorizontalGroup(
             AccountValueBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AccountValueBoxLayout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addComponent(AccountValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(78, 78, 78))
             .addGroup(AccountValueBoxLayout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(AccountValueLabelText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AccountValueBoxLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AccountValueLabel)
+                .addGap(26, 26, 26))
         );
         AccountValueBoxLayout.setVerticalGroup(
             AccountValueBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AccountValueBoxLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(AccountValueLabelText)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(AccountValueLabel)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         StockValueBox.setBackground(new java.awt.Color(255, 255, 255));
@@ -406,7 +406,7 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Symbol", "Stocks Owned", "Price", "Stock Value"
+                "Stock Symbol", "Amount Owned", "Stock Price", "Stock Value"
             }
         ));
         stockPortfolioTable.setEnabled(false);
@@ -430,8 +430,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(stockPortfolioPane)
                             .addGroup(PortfolioPanelLayout.createSequentialGroup()
                                 .addComponent(StockValueBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                                .addComponent(AccountValueBox, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addComponent(AccountValueBox, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)))
                         .addGap(51, 51, 51))))
         );
         PortfolioPanelLayout.setVerticalGroup(
@@ -543,36 +543,36 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        SidebarWatchlistBox.setBackground(new java.awt.Color(255, 255, 255));
-        SidebarWatchlistBox.addMouseListener(new java.awt.event.MouseAdapter() {
+        SidebarSellStocksBox.setBackground(new java.awt.Color(255, 255, 255));
+        SidebarSellStocksBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SidebarWatchlistBoxEnter(evt);
+                SidebarSellStocksBoxEnter(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                SidebarWatchlistBoxExit(evt);
+                SidebarSellStocksBoxExit(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                SidebarWatchlistBoxClicked(evt);
+                SidebarSellStocksBoxClicked(evt);
             }
         });
 
-        SidebarWatchlistLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
-        SidebarWatchlistLabel.setText("My Watchlist");
+        SidebarSellStocksLabel.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 25)); // NOI18N
+        SidebarSellStocksLabel.setText("Sell Stocks");
 
-        javax.swing.GroupLayout SidebarWatchlistBoxLayout = new javax.swing.GroupLayout(SidebarWatchlistBox);
-        SidebarWatchlistBox.setLayout(SidebarWatchlistBoxLayout);
-        SidebarWatchlistBoxLayout.setHorizontalGroup(
-            SidebarWatchlistBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SidebarWatchlistBoxLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SidebarWatchlistLabel)
+        javax.swing.GroupLayout SidebarSellStocksBoxLayout = new javax.swing.GroupLayout(SidebarSellStocksBox);
+        SidebarSellStocksBox.setLayout(SidebarSellStocksBoxLayout);
+        SidebarSellStocksBoxLayout.setHorizontalGroup(
+            SidebarSellStocksBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SidebarSellStocksBoxLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(SidebarSellStocksLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        SidebarWatchlistBoxLayout.setVerticalGroup(
-            SidebarWatchlistBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SidebarWatchlistBoxLayout.createSequentialGroup()
+        SidebarSellStocksBoxLayout.setVerticalGroup(
+            SidebarSellStocksBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SidebarSellStocksBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SidebarWatchlistLabel)
+                .addComponent(SidebarSellStocksLabel)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -585,7 +585,7 @@ public class Main extends javax.swing.JFrame {
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SidebarPortfolioBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(SidebarStockMarketBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-            .addComponent(SidebarWatchlistBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(SidebarSellStocksBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -601,7 +601,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addComponent(SidebarStockMarketBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
-                .addComponent(SidebarWatchlistBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SidebarSellStocksBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -670,8 +670,8 @@ public class Main extends javax.swing.JFrame {
         this.SidebarPortfolioLabel.setForeground(Color.BLACK);
         
         //unhovered
-        this.SidebarWatchlistBox.setBackground(Color.WHITE);
-        this.SidebarWatchlistLabel.setForeground(Color.BLACK);
+        this.SidebarSellStocksBox.setBackground(Color.WHITE);
+        this.SidebarSellStocksLabel.setForeground(Color.BLACK);
     }//GEN-LAST:event_StockMarketButtonEnter
 
     private void StockMarketButtonExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockMarketButtonExit
@@ -689,8 +689,8 @@ public class Main extends javax.swing.JFrame {
         this.SidebarPortfolioLabel.setForeground(Color.WHITE);
         
         //unhovered
-        this.SidebarWatchlistBox.setBackground(Color.WHITE);
-        this.SidebarWatchlistLabel.setForeground(Color.BLACK);
+        this.SidebarSellStocksBox.setBackground(Color.WHITE);
+        this.SidebarSellStocksLabel.setForeground(Color.BLACK);
     }//GEN-LAST:event_SidebarPortfolioBoxEnter
 
     private void SidebarPortfolioBoxExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarPortfolioBoxExit
@@ -698,7 +698,7 @@ public class Main extends javax.swing.JFrame {
         this.SidebarPortfolioLabel.setForeground(Color.BLACK);
     }//GEN-LAST:event_SidebarPortfolioBoxExit
 
-    private void SidebarWatchlistBoxEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarWatchlistBoxEnter
+    private void SidebarSellStocksBoxEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarSellStocksBoxEnter
         //unhovered      
         this.SidebarStockMarketBox.setBackground(Color.WHITE);
         this.SidbarStockMarketLabel.setForeground(Color.BLACK);
@@ -708,14 +708,14 @@ public class Main extends javax.swing.JFrame {
         this.SidebarPortfolioLabel.setForeground(Color.BLACK);
         
         //HOVERED
-        this.SidebarWatchlistBox.setBackground(Color.BLACK);
-        this.SidebarWatchlistLabel.setForeground(Color.WHITE);
-    }//GEN-LAST:event_SidebarWatchlistBoxEnter
+        this.SidebarSellStocksBox.setBackground(Color.BLACK);
+        this.SidebarSellStocksLabel.setForeground(Color.WHITE);
+    }//GEN-LAST:event_SidebarSellStocksBoxEnter
 
-    private void SidebarWatchlistBoxExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarWatchlistBoxExit
-        this.SidebarWatchlistBox.setBackground(Color.WHITE);
-        this.SidebarWatchlistLabel.setForeground(Color.BLACK);
-    }//GEN-LAST:event_SidebarWatchlistBoxExit
+    private void SidebarSellStocksBoxExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarSellStocksBoxExit
+        this.SidebarSellStocksBox.setBackground(Color.WHITE);
+        this.SidebarSellStocksLabel.setForeground(Color.BLACK);
+    }//GEN-LAST:event_SidebarSellStocksBoxExit
 
     private void StockMarketPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockMarketPressed
         this.PortfolioPanel.setVisible(false);
@@ -805,14 +805,45 @@ public class Main extends javax.swing.JFrame {
     	
     	stockPortfolio.updateStockPortfolio();
     	this.updateBankAccount();
+    	
+    	this.PortfolioBalanceLabel.setText(stockPortfolio.getPortfolioValueFormatted());
+    	this.PortfolioBalanceLabel.setMinimumSize(new java.awt.Dimension(this.PortfolioBalanceLabel.getText().length()*36,71));
     }
     
-    private void SidebarWatchlistBoxClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarWatchlistBoxClicked
-        JOptionPane.showMessageDialog(this, "Watchlist in W.I.P.");
-    }//GEN-LAST:event_SidebarWatchlistBoxClicked
-    
-    private void updatePopularStocks() {
+    @SuppressWarnings("deprecation")
+	private void SidebarSellStocksBoxClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarSellStocksBoxClicked
     	
+    	String sellingSymbol = JOptionPane.showInputDialog("Enter Stock Symbol to Sell: ");
+    	
+    	if(sellingSymbol == null) {
+    		JOptionPane.showMessageDialog(this, "Selling Symbol invalid.");
+    		return;
+    	}
+    	
+    	Stock s = new Stock(sellingSymbol);
+    	String amount = JOptionPane.showInputDialog(s.getSymbol()+"\n"
+    												+"Current Price: "+s.getPrice()+"\n"
+    												+"Stocks Owned: "+stockPortfolio.getStockAmountOwned(s)+"\n"+
+    												"Enter amount to sell: ");
+    	
+    	boolean sold = false;
+    	if(! (sellingSymbol == null || amount == null))
+    		sold = stockPortfolio.sellStock(s, new Integer(amount)); 
+    		if(sold) {
+    			this.updateBankAccount();
+    			this.updateStockPortfolio();
+    		}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Amount is invalid.");
+    	}
+    	
+    	
+    	
+        
+    }//GEN-LAST:event_SidebarSellStocksBoxClicked
+
+    @SuppressWarnings("unused")
+	private void updatePopularStocks() {
     	Stock stock1 = new Stock("AAPL");
     	Stock stock2 = new Stock("TSLA");
     	Stock stock3 = new Stock("PFE");
@@ -837,7 +868,6 @@ public class Main extends javax.swing.JFrame {
     	popularStock3PercentChange.setText("Percent Change: "+stock3.getPercentChangeFormatted());
     	popularStock3PreviousClose.setText("Previous Close: "+stock3.getPreviousCloseFormatted());
     	popularStock3Symbol.setText(stock3.getSymbol());
-    	
     	
     }
     
@@ -893,9 +923,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Sidebar;
     private javax.swing.JPanel SidebarPortfolioBox;
     private javax.swing.JLabel SidebarPortfolioLabel;
+    private javax.swing.JPanel SidebarSellStocksBox;
+    private javax.swing.JLabel SidebarSellStocksLabel;
     private javax.swing.JPanel SidebarStockMarketBox;
-    private javax.swing.JPanel SidebarWatchlistBox;
-    private javax.swing.JLabel SidebarWatchlistLabel;
     private javax.swing.JPanel StockMarketPanel;
     private javax.swing.JLabel StockMarketTitleLabel;
     private javax.swing.JPanel StockValueBox;

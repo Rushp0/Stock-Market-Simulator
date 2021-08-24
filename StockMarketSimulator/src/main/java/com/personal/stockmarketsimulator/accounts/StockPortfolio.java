@@ -5,6 +5,8 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import com.personal.stockmarketsimulator.stocks.Stock;
 
 public class StockPortfolio implements Serializable{
@@ -16,8 +18,7 @@ public class StockPortfolio implements Serializable{
 	private double stockValue;
 	private int stockAmount;
 	private Map<Stock, Integer> stockList = new HashMap<Stock, Integer>();
-//	private static Map<Stock, Integer> emptyHashMap = new HashMap<Stock, Integer>();
-	private BankAccount bankAccount;
+	private BankAccount bankAccount = new BankAccount();
 	
 	public StockPortfolio(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
@@ -49,8 +50,41 @@ public class StockPortfolio implements Serializable{
 		
 	}
 	
-	private void calculateStockValue() {
+	public boolean sellStock(Stock stock, int amount) {
 		
+		for(Stock key : stockList.keySet()) {
+			if(key.equals(stock) && stockList.get(key)>=amount) {
+				
+				bankAccount.deposit(amount*key.getPrice());
+				stockList.replace(key, stockList.get(key), stockList.get(key)-amount);
+				
+				if(stockList.get(key).equals(0))
+					stockList.remove(key);
+				
+				
+				this.updateStockPortfolio();
+				return true;
+				
+			} else {
+				JOptionPane.showConfirmDialog(null, "Not enough stocks to sell.");
+			}
+		}
+		return false;
+		
+	}
+	
+	public int getStockAmountOwned(Stock stock) {
+		
+		for(Stock key : stockList.keySet())
+			if(key.equals(stock))
+				return stockList.get(key);
+		
+		return 0;
+		
+	}
+	
+	private void calculateStockValue() {
+		stockValue = 0;
 		for(Stock key : stockList.keySet())
 			stockValue += (key.getPrice()*stockList.get(key));
 		
@@ -108,6 +142,7 @@ public class StockPortfolio implements Serializable{
 	}
 	
 	public double getPortfolioValue() {
+		calculateStockValue();
 		return stockValue;
 	}
 	
@@ -116,7 +151,7 @@ public class StockPortfolio implements Serializable{
 	}
 	
 	public String getPortfolioValueFormatted() {
-		
+		calculateStockValue();
 		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
 		return currencyFormatter.format(stockValue);
 	}
@@ -127,7 +162,7 @@ public class StockPortfolio implements Serializable{
 
 	public String[] getDataArray(Stock s) {
 		NumberFormat currencyFormatter =  NumberFormat.getCurrencyInstance();
-		return new String[] {s.getSymbol(), stockList.get(s).toString(), ((Double)s.getPrice()).toString(), (currencyFormatter.format((Double)(stockList.get(s)*s.getPrice()))).toString()};
+		return new String[] {s.getSymbol(), stockList.get(s).toString(), currencyFormatter.format(((Double)s.getPrice())).toString(), (currencyFormatter.format((Double)(stockList.get(s)*s.getPrice()))).toString()};
 	}	
 
 	public void updateStockPortfolio() {
