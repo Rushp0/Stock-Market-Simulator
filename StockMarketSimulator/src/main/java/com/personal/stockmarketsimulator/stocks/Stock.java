@@ -53,7 +53,7 @@ public class Stock implements Serializable{
 
 		URL url;
 		try {
-			url = new URL("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+symbol+"&apikey=4VPGHSZ4AR8J12D4");
+			url = new URL("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+symbol+"&apikey=");
 			HttpURLConnection request = (HttpURLConnection) url.openConnection();
 			
 			request.setRequestMethod("GET");
@@ -65,12 +65,7 @@ public class Stock implements Serializable{
 			
 			while(scn.hasNext())
 				output+=scn.nextLine();
-			
-//			if(output.contains("\"Global Quote\": {}"))
-				// finish
-			
 
-			
 			String[] splitResponse = output.split(",");
 			splitResponse[0]=splitResponse[0].substring(splitResponse[0].indexOf("01."));
 			splitResponse[splitResponse.length-1] = splitResponse[splitResponse.length-1].replace("}", "").strip();
